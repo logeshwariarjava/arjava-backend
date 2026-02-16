@@ -24,18 +24,18 @@ app = FastAPI(
     version="1.0.0"
 )
 
-@app.middleware("http")
-async def validate_host(request: Request, call_next):
-    allowed_hosts = ["arjava.localhost",]
-    host = request.headers.get("host", "").split(":")[0]
+# @app.middleware("http")
+# async def validate_host(request: Request, call_next):
+#     allowed_hosts = ["arjava.localhost",]
+#     host = request.headers.get("host", "").split(":")[0]
     
-    print(f"Incoming host: {host}")  # Debug print
+#     print(f"Incoming host: {host}")  # Debug print
     
-    if host not in allowed_hosts:
-        raise HTTPException(status_code=403, detail=f"Access denied. Only arjava .localhost allowed, got: {host}")
+#     if host not in allowed_hosts:
+#         raise HTTPException(status_code=403, detail=f"Access denied. Only arjava .localhost allowed, got: {host}")
     
-    response = await call_next(request)
-    return response
+#     response = await call_next(request)
+#     return response
 
 @app.get("/")
 async def root():
@@ -90,4 +90,4 @@ async def delete_user(user_id: int):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=10000)
